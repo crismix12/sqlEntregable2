@@ -59,7 +59,22 @@ insert into autores (nombre, descripcion) values ('cristhian', 'autor del blog d
 insert into autores (nombre, descripcion) values ('cris2', 'autor del blog de autos');
 
 insert into comentario (comentario, user_id) values ('que bonito auto', 1);
+insert into comentario (comentario, user_id) values ('que lindo auto', 1);
 insert into comentario (comentario, user_id) values ('que rica comida', 2);
 
 insert into entradas (titulo, descripcion, autor_id, contenido, categoria_id) values ('Mi auto', 'presentacion de mi auto', 2, 'autos', 2);
 insert into entradas (titulo, descripcion, autor_id, contenido, categoria_id) values ('Comida', 'presentacion de mi menu', 1, 'comida', 1);
+
+insert into entradas_comentarios (entrada_id, comentario_id) values (1, 1);
+insert into entradas_comentarios (entrada_id, comentario_id) values (2, 2);
+insert into entradas_comentarios (entrada_id, comentario_id) values (1, 3);
+
+
+-- seleccionar que usuarios comentaron en que entrada
+
+select u.nombre, ec.entrada_id, c.comentario  from "user" u
+inner join comentario c 
+on u.user_id = c.user_id
+inner join entradas_comentarios ec 
+on c.comentario_id = ec.comentario_id
+where u.user_id = 1;
